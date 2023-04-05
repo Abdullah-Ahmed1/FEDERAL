@@ -12,18 +12,33 @@ datasource db {
 
 
 model User {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  email       String    @unique
   username    String
-  tweets      Tweet[]
+  password    String
+  phone       String?
 }
 
-model Tweet {
-  id          Int       @id @default(autoincrement())
+model Product { 
+  id            String @id @default(uuid())
+  name          String 
+  description   String
+  price         Int
+  color         String
+  image1        String
+  image2        String 
+  image3        String?
+  category      Category @relation(fields: [categoryId], references: [id])
+  categoryId    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  content     String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+}
+
+model Category {
+  id  String    @id @default(uuid())
+  name String
+  products      Product[]
+
 }
