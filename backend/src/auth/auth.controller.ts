@@ -1,6 +1,8 @@
-import { Controller,Post,Req } from '@nestjs/common';
+import { Controller,Post,Req,Get,UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request } from 'express';
+import { GoogleOAuthGuard } from './utils/google-oauth.guard';
+import { AuthGuard } from './utils/auth.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService){}
@@ -15,6 +17,20 @@ export class AuthController {
         return this.authService.signin(req)       
     }
 
+    @UseGuards(GoogleOAuthGuard)
+    @Get('test')
+    test(){
+      console.log("reacheddddddddddddddddd")   
+    }
 
+    @Get()
+    @UseGuards(GoogleOAuthGuard)
+    async googleAuth(@Req() req) {}
+  
+    @Get('google-redirect')
+    @UseGuards(GoogleOAuthGuard)
+    googleAuthRedirect(@Req() req) {
+      return this.authService.googleLogin(req);
+    }
 
 }
