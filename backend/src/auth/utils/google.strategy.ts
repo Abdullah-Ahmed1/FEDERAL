@@ -6,7 +6,7 @@ import {Injectable} from '@nestjs/common'
 export class GoogleStrategy extends PassportStrategy(Strategy){
     constructor(){
         super({
-            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientID: process.env.CLIENT_ID ,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: 'http://localhost:3000/auth/google-redirect',
             scope: ['email', 'profile'],
