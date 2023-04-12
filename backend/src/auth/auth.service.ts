@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Request } from 'express';
+import { JwtAuthService } from '../jwt/jwt-auth.service';
 @Injectable()
 export class AuthService {
-    constructor(private prisma : PrismaService){}
+    constructor(private prisma : PrismaService,private jwtAuthService: JwtAuthService){}
 
     async signup(req : Request){
         console.log(req.body.phone)
@@ -28,14 +29,28 @@ export class AuthService {
         return {msg : "this is a signed in function"}
     }
 
-    googleLogin(req) {
-        if (!req.user) {
-          return 'No user from google';
+    googleLogin(req,res) {
+        try { 
+            if (!req.user) {
+                return 'No user from google';
+              }
+              const { accessToken } = this.jwtAuthService.login(req.user);
+              res.cookie('jwt', accessToken, {
+                httpOnly: true,
+                sameSite: 'lax',
+              });
+      
+             return res.send({
+                message: 'User information from google',
+                user: req.user,
+              })
+            //   return {
+            //     message: 'User information from google',
+            //     user: req.user,
+            //   };    
+        }catch(err){
+            console.log("------>error is   :",err )
         }
-    
-        return {
-          message: 'User information from google',
-          user: req.user,
-        };
+        
       }
 }
