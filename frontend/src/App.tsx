@@ -1,4 +1,3 @@
-import './App.css'
 import {Routes,Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Store from './pages/Store'
@@ -19,8 +18,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Button from '@mui/material/Button';
-import Grid2 from '@mui/material/Unstable_Grid2';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 interface Props {
   window?: () => Window;
@@ -29,7 +28,7 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-export default function Navbar(props: Props) {
+export default function Main(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -126,6 +125,8 @@ export default function Navbar(props: Props) {
          <Route  path='/'  element={<Home/>} />
          <Route  path='/store'  element={<Store/>} />
          <Route  path='/about'  element={<AboutUs/>} />
+         <Route  path='/login'  element={<Login/>} />
+         <Route  path='/register'  element={<Register/>} />
        </Routes>
       </Box>
       
