@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 const Register = () => {
     return (
         <Grid2 container justifyContent={'center'} >
-            <Grid2 container flexDirection={'column'} alignItems={'center'} lg={5} xs={11} sx={{ backgroundColor: 'white', marginTop: { xs: '100px' } }}>
+            <Grid2 container flexDirection={'column'} alignItems={'center'} lg={5} xs={11} sx={{ backgroundColor: 'white', marginTop: { xs: '100px',lg : '20px' } }}>
                 <Grid2>
                     <h1 style={{ fontStyle: "italic" }}>REGISTER</h1>
                 </Grid2>
