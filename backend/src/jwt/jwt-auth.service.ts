@@ -10,10 +10,10 @@ export class JwtAuthService {
   login(user) {
     try{
         const payload: JwtPayload = { username: user.username, sub: user.id };
-        console.log("reacjed")
+        console.log("reached")
         return {
         
-          accessToken: this.jwtService.sign(payload,{secret:"12345"}),
+          accessToken: this.jwtService.sign(payload,{secret: process.env.JWT_SECRET}),
         };
     }catch(err){
         console.log("error is  : " ,err)

@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { Request } from 'express';
 import { GoogleOAuthGuard } from './utils/google-oauth.guard';
 import { AuthGuard } from './utils/auth.guard';
+import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService){}
@@ -17,7 +18,7 @@ export class AuthController {
         return this.authService.signin(req)       
     }
 
-    @UseGuards(GoogleOAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get('test')
     test(){
       console.log("reacheddddddddddddddddd")   
