@@ -3,6 +3,7 @@
 /node_modules
 /prisma/migrations
 .env
+package-lock.json
 # Logs
 logs
 *.log
