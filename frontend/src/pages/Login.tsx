@@ -2,8 +2,15 @@ import Grid2 from '@mui/material/Unstable_Grid2'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import GoogleIcon from '@mui/icons-material/Google';
+import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Login = ()=>{
+        const navigate = useNavigate()
+    const onGoogleCick = async()=>{ 
+        navigate('http://localhost:3000/auth')
+    }
+
     return (
         <Grid2 container justifyContent={'center'} >
            <Grid2 container   flexDirection={'column'} alignItems={'center'} lg ={5} xs={11} sx= {{backgroundColor:'white',marginTop: { xs: '100px',lg :"20px" }}}>
@@ -20,6 +27,12 @@ const Login = ()=>{
                 <Button fullWidth sx = {{height:"50px",backgroundColor:"#D8232F",'&:hover':{backgroundColor:"#D8232F"}}} variant="contained" color="success" >
                     Submit
                 </Button>
+                </Grid2>
+                <Grid2 sx = {{padding:"20px 0px 0px 0px"}}>
+                    <a href="http://localhost:3000/auth">
+                    <GoogleIcon sx={{color:"#D8232F",cursor:"pointer"}} />
+                    </a>
+                   
                 </Grid2>
                 <Grid2 sx = {{padding:"20px 0px 0px 0px"}}>
                     <Typography sx = {{color:"#D8232F"}} >Forget your Password?</Typography>
