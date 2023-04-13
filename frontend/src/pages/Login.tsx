@@ -4,12 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link,useNavigate } from 'react-router-dom';
-import axios from 'axios';
 const Login = ()=>{
-        const navigate = useNavigate()
-    const onGoogleCick = async()=>{ 
-        navigate('http://localhost:3000/auth')
-    }
+ 
 
     return (
         <Grid2 container justifyContent={'center'} >
