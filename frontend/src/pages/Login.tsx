@@ -2,6 +2,7 @@ import Grid2 from '@mui/material/Unstable_Grid2'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 const Login = ()=>{
     return (
         <Grid2 container justifyContent={'center'} >
@@ -16,7 +17,7 @@ const Login = ()=>{
                 <TextField id="outlined-basic" fullWidth  variant="outlined" placeholder='Password' />
                 </Grid2>
                 <Grid2 lg = {10} xs={11} >
-                <Button fullWidth sx = {{height:"50px",backgroundColor:"#D8232F"}} variant="contained" color="success" >
+                <Button fullWidth sx = {{height:"50px",backgroundColor:"#D8232F",'&:hover':{backgroundColor:"#D8232F"}}} variant="contained" color="success" >
                     Submit
                 </Button>
                 </Grid2>
@@ -24,7 +25,10 @@ const Login = ()=>{
                     <Typography sx = {{color:"#D8232F"}} >Forget your Password?</Typography>
                 </Grid2>
                 <Grid2 sx = {{padding:"20px 0px 20px 0px"}}>
+                    <Link to={'/register'} style={{textDecoration:"none"}}>
                     <Typography sx = {{color:"#D8232F"}} >Create An Account</Typography>
+                    </Link>
+                    
                 </Grid2>
            </Grid2>
         </Grid2>
