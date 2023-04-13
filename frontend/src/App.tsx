@@ -1,3 +1,4 @@
+import './App.css'
 import {Routes,Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Store from './pages/Store'
@@ -58,7 +59,7 @@ export default function Main(props: Props) {
 
   return (
     
-    <Box >
+    <Box  sx = {{backgroundColor:"#f0f0f0",minHeight:"85.5vh"}}>
       <CssBaseline />
 
       <AppBar  sx  = {{backgroundColor:"#222222",minHeight:"105px"}}>
@@ -94,11 +95,11 @@ export default function Main(props: Props) {
       <Box component='nav' sx = {{backgroundColor:"#222222",display:{xs :"none",lg : 'flex'},marginTop:"106px",height:"70px",width:"100%"}}>
         <div style={{margin:"auto"}}>
           <ul style={{listStyle:"none"}}>
-            <li style={{color:"white",display:"inline",padding:"20px 20px",fontSize:"20px"}}>HOME</li>
-            <li style={{color:"white",display:"inline",padding:"20px 20px",fontSize:"20px"}}>BOOTS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 20px",fontSize:"20px"}}>HELMETS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 20px",fontSize:"20px"}}>SUITS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 20px",fontSize:"20px"}}>GLOVES</li>
+            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>HOME</li>
+            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>BOOTS</li>
+            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>HELMETS</li>
+            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>SUITS</li>
+            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>GLOVES</li>
           </ul>
         </div>
       </Box>
