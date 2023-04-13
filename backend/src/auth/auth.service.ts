@@ -39,11 +39,16 @@ export class AuthService {
                 httpOnly: true,
                 sameSite: 'lax',
               });
-      
-             return res.send({
+              const response = {
                 message: 'User information from google',
                 user: req.user,
-              })
+              }
+              res.redirect(`http://localhost:5173?response=${encodeURIComponent(JSON.stringify(response))}`)
+      
+            // return res.send({
+            //     message: 'User information from google',
+            //     user: req.user,
+            // })
             //   return {
             //     message: 'User information from google',
             //     user: req.user,
