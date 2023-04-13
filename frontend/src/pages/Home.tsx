@@ -16,6 +16,18 @@ const Home = ()=>{
   }).catch((err)=>{
     console.log(err)
   })
+
+  const urlParams = new URLSearchParams(window.location.search);
+const responseParam = urlParams.get('response');
+
+      if (responseParam) {
+        const response = JSON.parse(decodeURIComponent(responseParam));
+        console.log("response---------->",response)
+        // Do something with the response object here
+      } else {
+        // Handle the case where the response parameter is not present in the URL
+        console.log("there is no reponse ")
+      }
   },[])
     return(
         <Grid2 container flexDirection={'row'} sx = {{backgroundColor:"green"}}>
