@@ -26,8 +26,9 @@ import Jackets from './pages/Jackets';
 import Suits from './pages/Suits';
 import { NavItems } from './utils/NavItems';
 import Boots from './pages/Boots'
-import LoginIcon from '@mui/icons-material/Login';
+// import LoginIcon from '@mui/icons-material/Login';
 import Badge from '@mui/material/Badge';
+import Footer from './components/Footer'
 interface Props {
   window?: () => Window;
 }
@@ -64,7 +65,6 @@ export default function Main(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    
     <Box  sx = {{backgroundColor:"#f0f0f0",minHeight:"85.5vh"}}>
       <CssBaseline />
 
@@ -93,11 +93,13 @@ export default function Main(props: Props) {
           <Badge badgeContent={4} color="secondary">
             <ShoppingCartIcon/>
           </Badge>
-            {/* {navItems.map((item) => (
+            {
+            /* {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>
-            ))} */}
+            ))} */
+            }
           </Box>
         </Toolbar>
       </AppBar>
@@ -114,7 +116,7 @@ export default function Main(props: Props) {
               )
             })
             }
-             <Link to ={'/login'} style ={{textDecoration:"none"}}>
+             <Link to ={'/login'} style ={{textDecoration:"none",marginLeft:"50px"}}>
              <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px",fontWeight:"bold"}}>LOGIN</li> 
              </Link> 
             
@@ -138,7 +140,7 @@ export default function Main(props: Props) {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main" sx={{ p: 0 }}>
         {/* <Toolbar /> */}
         <Routes>
          <Route  path='/'  element={<Home/>} />
@@ -151,6 +153,9 @@ export default function Main(props: Props) {
          <Route  path='/suits'  element={<Suits/>} /> 
          <Route  path='/boots'  element={<Boots/>} />
        </Routes>
+      </Box>
+      <Box >
+        <Footer/>
       </Box>
       
      </Box>
