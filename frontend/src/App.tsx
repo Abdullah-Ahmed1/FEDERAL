@@ -1,5 +1,5 @@
 import './App.css'
-import {Routes,Route} from 'react-router-dom'
+import {Routes,Route,Link} from 'react-router-dom'
 import Home from './pages/Home'
 import Store from './pages/Store'
 import AboutUs from './pages/AboutUs'
@@ -21,7 +21,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import Helmets from './pages/Helmets';
+import Jackets from './pages/Jackets';
+import Suits from './pages/Suits';
+import { NavItems } from './utils/NavItems';
+import Boots from './pages/Boots'
+import LoginIcon from '@mui/icons-material/Login';
+import Badge from '@mui/material/Badge';
 interface Props {
   window?: () => Window;
 }
@@ -78,11 +84,15 @@ export default function Main(props: Props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' ,margin:"20px 0px 0px 100px"} }}
           >
+            <Link to = '/' style={{color:"white",textDecoration:"none"}}>
             Federal
+          </Link> 
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' },marginTop:"30px"}}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' },marginTop:"30px"}}>
           <SearchIcon sx = {{marginRight:"25px"}}/>
-          <ShoppingCartIcon/>
+          <Badge badgeContent={4} color="secondary">
+            <ShoppingCartIcon/>
+          </Badge>
             {/* {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
                 {item}
@@ -95,11 +105,19 @@ export default function Main(props: Props) {
       <Box component='nav' sx = {{backgroundColor:"#222222",display:{xs :"none",lg : 'flex'},marginTop:"106px",height:"70px",width:"100%"}}>
         <div style={{margin:"auto"}}>
           <ul style={{listStyle:"none"}}>
-            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>HOME</li>
-            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>BOOTS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>HELMETS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>SUITS</li>
-            <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}}>GLOVES</li>
+            {
+            NavItems.map((item,index)=>{
+              return(
+                <Link to={item.link} key={index} style={{textDecoration:"none",color :"white"}}>
+                  <li style={item.style}>{item.name}</li>
+                </Link>
+              )
+            })
+            }
+             <Link to ={'/login'} style ={{textDecoration:"none"}}>
+             <li style={{color:"white",display:"inline",padding:"20px 50px",fontSize:"14px",fontWeight:"bold"}}>LOGIN</li> 
+             </Link> 
+            
           </ul>
         </div>
       </Box>
@@ -128,6 +146,10 @@ export default function Main(props: Props) {
          <Route  path='/about'  element={<AboutUs/>} />
          <Route  path='/login'  element={<Login/>} />
          <Route  path='/register'  element={<Register/>} />
+         <Route  path='/helmets'  element={<Helmets/>} />
+         <Route  path='/jackets'  element={<Jackets/>} />
+         <Route  path='/suits'  element={<Suits/>} /> 
+         <Route  path='/boots'  element={<Boots/>} />
        </Routes>
       </Box>
       
