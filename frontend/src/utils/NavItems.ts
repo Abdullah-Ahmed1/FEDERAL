@@ -2,7 +2,7 @@ export const  NavItems = [
     {
         name: 'HOME',
         link: '/',
-        style: {color:"white",display:"inline",padding:"20px 50px",fontSize:"14px"}
+        style: {color:"white",display:"inline",padding:"20px 50px",fontSize:"14px",fontFamily:"Montserrat,sans-serif" }
     },
     {
         name: 'BOOTS',
