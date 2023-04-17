@@ -1,0 +1,30 @@
+.jac {
+    cursor: pointer;
+    width: 250px;
+
+    padding: 30px 10px 0px 10px;
+    margin: 0;
+}
+.g {
+    background-color: white;
+}
+.d {
+    position:absolute;
+    background-color:red;
+    padding:10px 30px;
+    display: none; 
+ }
+.jac:hover {
+    background-color: #f0f0f0;
+    
+}
+.g:hover {
+   background-color: #f0f0f0; 
+}
+
+.g:hover .d  {
+    
+    display: block;
+    /* transform: translate(50px,100px);
+    transition: transform 2s ease-in; */
+}
