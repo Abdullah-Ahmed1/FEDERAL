@@ -6,15 +6,15 @@ import { JwtAuthService } from '../jwt/jwt-auth.service';
 export class AuthService {
     constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService) { }
 
-    async signup(req: Request, res: Response) {
-        console.log(req.body.phone)
+    async signup(body, res: Response) {
+        console.log(body.phone)
         try {
             const user = await this.prisma.user.create({
                 data: {
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password,
-                    phone: req.body.phone
+                    username: body.username,
+                    email: body.email,
+                    password: body.password,
+                    phone: body.phone
                 }
             })
             console.log(user)
@@ -77,8 +77,6 @@ export class AuthService {
                 user: req.user,
             }
             res.redirect(`http://localhost:5173?response=${encodeURIComponent(JSON.stringify(response))}`)
-
-
         } catch (err) {
             console.log("------>error is   :", err)
         }

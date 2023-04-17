@@ -1,16 +1,17 @@
-import { Controller,Post,Req,Res,Get,UseGuards } from '@nestjs/common';
+import { Controller,Post,Req,Res,Get,UseGuards,Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request } from 'express';
 import { GoogleOAuthGuard } from './utils/google-oauth.guard';
 // import { AuthGuard } from './utils/auth.guard';
+import { UserDto } from '../auth/dto/user.dto';
 import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService){}
 
     @Post('signup')
-    signup(@Req() req : Request,@Res() res){
-        return this.authService.signup(req,res);
+    signup(@Body() body:UserDto,@Res() res){
+        return this.authService.signup(body,res);
     }
 
     @Post('signin') // this here defines the endpoint for an API
