@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { JwtAuthService } from '../jwt/jwt-auth.service';
 @Injectable()
 export class AuthService {
     constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService) { }
 
-    async signup(req: Request) {
+    async signup(req: Request, res: Response) {
         console.log(req.body.phone)
         try {
             const user = await this.prisma.user.create({
@@ -18,15 +18,48 @@ export class AuthService {
                 }
             })
             console.log(user)
-            return { msg: "this is a signup function" }
+            return res.status(200).send({ msg: "user registered successfully" })
         } catch (err) {
+            console.log(err)
+            return res.status(400).send({
+                msg: "something went wrong"
+            })
             console.log(err)
         }
     }
 
-    signin(req: Request) {
-        console.log(req.body)
-        return { msg: "this is a signed in function" }
+    async signin(req: Request, res: Response) {   //login
+
+        try {
+            const user = await this.prisma.user.findFirst({
+                where: {
+                    email: req.body.email
+                }
+            })
+            console.log("user---->", user)
+
+            if (!user) return res.status(400).send({
+                msg: "Invalid email or password"
+            })
+
+            if (user.password != req.body.password) {
+                return res.status(400).send({
+                    msg: "Invalid email or password"
+                })
+            }
+
+            return res.status(200).send({
+                msg: "Logged in successfully"
+            })
+        } catch (err) {
+            console.log(err)
+
+            return res.status(400).send({
+                msg: "somthing went wrong"
+            })
+        }
+
+
     }
 
     googleLogin(req, res) {
