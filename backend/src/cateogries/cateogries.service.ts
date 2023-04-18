@@ -29,7 +29,18 @@ export class CateogriesService {
     async updateCategory(req: Request, res: Response) {
         console.log("update category endpoint reached")
         try {
-            await this.prisma.category.update({
+
+            const category = await this.prisma.category.findFirst({
+                where :{
+                    id : req.params.categoryId
+                }
+            })
+            
+            if(!category) return res.status(400).send({
+                msg: "record to update not found"
+            })
+
+            const updatedCateogry =  await this.prisma.category.update({
                 where: {
                     id: req.params.categoryId
                 },
@@ -37,6 +48,8 @@ export class CateogriesService {
                     name: req.body.name
                 }
             })
+            console.log("---->",updatedCateogry)
+
 
             return res.status(200).send({
                 msg: "category updated successfully"
