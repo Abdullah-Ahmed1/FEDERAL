@@ -38,7 +38,6 @@ export class ProductsService {
 
     async updateProduct(req, res) {
         try {
-
             const product = await this.prisma.product.findFirst({
                 where: { id: req.params.productId }
             })

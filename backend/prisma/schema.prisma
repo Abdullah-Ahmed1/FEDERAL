@@ -22,7 +22,7 @@ model User {
 }
 
 model Product { 
-  id            String @id @default(uuid())
+  id            String   @id @default(uuid())
   name          String 
   description   String
   price         Int
@@ -30,15 +30,35 @@ model Product {
   image1        String
   image2        String 
   image3        String?
-  category      Category @relation(fields: [categoryId], references: [id])
+  category      Category  @relation(fields: [categoryId], references: [id])
   categoryId    String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  orders     OrdersOfProducts[]
+  
 }
 
 model Category {
-  id  String    @id @default(uuid())
-  name String
+  id            String    @id @default(uuid())
+  name          String
   products      Product[]
 
+}
+
+model Order {
+  id           String @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     OrdersOfProducts[]
+}
+
+model OrdersOfProducts {
+  order       Order @relation(fields: [orderId], references: [id])
+  orderId     String 
+  product    Product @relation(fields: [productId], references: [id])
+  productId  String 
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@id([productId, orderId])
 }
