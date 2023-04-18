@@ -10,7 +10,7 @@ export class CateogriesService {
         try {
             await this.prisma.category.create({
                 data: {
-                    name: "Helmets"
+                    name: req.body.name
                 }
             })
 
@@ -35,7 +35,7 @@ export class CateogriesService {
                     id : req.params.categoryId
                 }
             })
-            
+
             if(!category) return res.status(400).send({
                 msg: "record to update not found"
             })

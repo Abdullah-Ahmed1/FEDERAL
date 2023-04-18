@@ -13,6 +13,17 @@ export class ProductsService {
     async addProduct(req: Request, res: Response) {
         console.log("addproduct route reached")
         try {
+            
+            const category = await this.prisma.category.findFirst({
+                where:{
+                    id : req.params.categoryId
+                }
+            }) 
+
+            if(!category) return res.status(404).send({
+                msg: "category not found"
+            })
+            
             await this.prisma.product.create({
                 data: {
                     name: req.body.name,
