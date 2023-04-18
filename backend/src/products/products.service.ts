@@ -35,8 +35,28 @@ export class ProductsService {
                 msg: "Something went Wrong"
             })
         }
-
     }
+
+    async updateProduct(req,res){
+        try{
+            await this.prisma.product.update({
+                where :{
+                   id : req.params.productId     
+                },
+                data: req.body  
+            })
+
+            return res.status(200).send({
+                msg : "product updated successfully"
+            })
+        }catch(err){
+            console.log(err)
+            return res.status(400).send({
+                msg : "Something went wrong"
+            })
+        }
+    }
+
     getAllProducts() {
         console.log("getAllProducts route reached")
     }

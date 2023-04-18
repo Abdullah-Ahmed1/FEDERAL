@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Res, Get, UseGuards, Body } from '@nestjs/common';
+import { Controller, Post, Req, Res, Get,Put,UseGuards, Body } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Request,Response } from 'express';
 @Controller('products')
@@ -13,6 +13,11 @@ export class ProductsController {
     @Post('addProduct/:categoryId')
     addProduct(@Req() req :Request,@Res() res : Response){
         this.productService.addProduct(req,res)
+    }
+
+    @Put('updateProduct/:productId')
+    updateProduct(@Req() req :Request,@Res() res : Response){
+        this.productService.updateProduct(req,res)
     }
 
     @Get('getAllProducts')
