@@ -1,6 +1,6 @@
 import { Controller, Post, Req, Res, Get, UseGuards, Body } from '@nestjs/common';
 import { ProductsService } from './products.service';
-
+import { Request,Response } from 'express';
 @Controller('products')
 export class ProductsController {
     constructor(private productService: ProductsService) { }
@@ -10,9 +10,9 @@ export class ProductsController {
         this.productService.test()
     }
 
-    @Post('addProduct')
-    addProduct(){
-        this.productService.addProduct()
+    @Post('addProduct/:categoryId')
+    addProduct(@Req() req :Request,@Res() res : Response){
+        this.productService.addProduct(req,res)
     }
 
     @Get('getAllProducts')
