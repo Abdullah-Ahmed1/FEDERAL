@@ -74,8 +74,25 @@ export class ProductsService {
        }
     }
 
-    getProdcutById() {
+    async getProductById(req: Request,res:Response) {
         console.log("getProductById route reached")
+        try{
+         const product =  await this.prisma.product.findFirst({
+            where:{
+                id: req.params.productId
+            }
+         })
+
+         return res.status(200).send({
+            msg :'success',
+            product
+         })
+
+        }catch(err){
+            return res.status(400).send({
+                msg:"something went wrong"
+            })
+        }
     }
 
 
