@@ -57,8 +57,21 @@ export class ProductsService {
         }
     }
 
-    getAllProducts() {
-        console.log("getAllProducts route reached")
+    async getAllProducts(req :Request,res:Response) {
+       try {
+        const products =  await this.prisma.product.findMany({
+            where:{}
+        })
+        return res.status(200).send({
+            msg: "success",
+            products: products
+        })
+
+       }catch(err){
+        return res.status(400).send({
+            msg :"Something Went Wrong"
+        })
+       }
     }
 
     getProdcutById() {

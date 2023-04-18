@@ -21,8 +21,8 @@ export class ProductsController {
     }
 
     @Get('getAllProducts')
-    getAllProducts(){
-        this.productService.getAllProducts()
+    getAllProducts(@Req() req :Request,@Res() res : Response){
+        this.productService.getAllProducts(req,res)
     }
 
     @Get('getProductById')
