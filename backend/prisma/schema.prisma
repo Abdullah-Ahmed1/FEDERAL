@@ -58,9 +58,9 @@ model Order {
 }
 
 model OrdersOfProducts {
-  order        Order @relation(fields: [orderId], references: [id])
+  order        Order     @relation(fields: [orderId], references: [id])
   orderId      String 
-  product      Product @relation(fields: [productId], references: [id])
+  product      Product   @relation(fields: [productId], references: [id])
   productId    String 
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -70,7 +70,7 @@ model OrdersOfProducts {
 
 
 model Cart {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   quantity    String 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -80,10 +80,11 @@ model Cart {
 
 
 model CartOfProducts {
-  cart        Cart @relation(fields: [cartId], references: [id])
+  cart        Cart      @relation(fields: [cartId], references: [id])
   cartId      String 
-  product      Product @relation(fields: [productId], references: [id])
-  productId    String 
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String 
+  productQuantity Int 
 
   @@id([productId, cartId])
 }
