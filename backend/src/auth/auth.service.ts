@@ -14,7 +14,8 @@ export class AuthService {
                     username: body.username,
                     email: body.email,
                     password: body.password,
-                    phone: body.phone
+                    phone: body.phone,
+                    address: body.address
                 }
             })
             console.log(user)
@@ -24,7 +25,6 @@ export class AuthService {
             return res.status(400).send({
                 msg: "something went wrong"
             })
-            console.log(err)
         }
     }
 
@@ -53,7 +53,6 @@ export class AuthService {
             })
         } catch (err) {
             console.log(err)
-
             return res.status(400).send({
                 msg: "somthing went wrong"
             })

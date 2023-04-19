@@ -10,15 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   email       String    @unique    
   username    String
+  address     String
   password    String
   phone       String?
+  orders      Order[]
 }
 
 model Product { 
@@ -34,8 +35,7 @@ model Product {
   categoryId    String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  orders        OrdersOfProducts[]
-  
+  orders        OrdersOfProducts[]  
 }
 
 model Category {
@@ -46,9 +46,11 @@ model Category {
 }
 
 model Order {
-  id           String @id @default(uuid())
+  id           String    @id @default(uuid())
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  customer     User      @relation(fields: [customerId], references: [id])
+  customerId   String
   products     OrdersOfProducts[]
 }
 

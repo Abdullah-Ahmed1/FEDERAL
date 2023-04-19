@@ -13,6 +13,10 @@ export class UserDto {
     @IsString()
     @IsNotEmpty()
     public password:String;
+
+    @IsString()
+    @IsNotEmpty()
+    public address:String;
     
     @IsString()
     @IsOptional()
