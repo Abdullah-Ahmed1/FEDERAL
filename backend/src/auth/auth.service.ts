@@ -7,7 +7,6 @@ export class AuthService {
     constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService) { }
 
     async signup(body, res: Response) {
-        console.log(body.phone)
         try {
             const user = await this.prisma.user.create({
                 data: {
@@ -18,7 +17,6 @@ export class AuthService {
                     address: body.address
                 }
             })
-            console.log(user)
             return res.status(200).send({ msg: "user registered successfully" })
         } catch (err) {
             console.log(err)
@@ -36,7 +34,6 @@ export class AuthService {
                     email: req.body.email
                 }
             })
-            console.log("user---->", user)
 
             if (!user) return res.status(400).send({
                 msg: "Invalid email or password"
