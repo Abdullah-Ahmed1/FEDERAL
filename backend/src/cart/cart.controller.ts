@@ -13,7 +13,7 @@ export class CartController {
         
     }
 
-    @Get("viewCart/:cartId")
+    @Get("viewCart/:userId")
     viewCart(@Req() req: Request, @Res() res: Response){
         this.cartService.viewCart(req,res)
     }

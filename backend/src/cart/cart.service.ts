@@ -74,8 +74,38 @@ export class CartService {
         
     }
 
-    viewCart(req: Request,res:Response){
+    async viewCart(req: Request,res:Response){
         console.log("view cart endpoint reached")
+        try{
+            const cart =  await this.prisma.cart.findFirst({
+                where:{
+                    customerId:req.params.userId,
+                    isCheckedOut:false
+                },
+                include:{
+                    products : {
+                        select:{
+                            product:true
+                        }
+                    }
+                    
+                }
+            })
+            if(!cart)return res.send({
+                msg :"your cart is empty"
+            })
+
+            return res.send({
+                msg :"success",
+                cart : cart
+            })
+
+        }catch(err){
+            console.log(err)
+            return res.status(400).send({
+                msg :"something went wrong"
+            })
+        }
     }
 
     removeProductFromCart(req: Request,res:Response){
