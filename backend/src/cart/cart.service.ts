@@ -70,8 +70,7 @@ export class CartService {
             return res.status(400).send({
                 mag :"something went wrong"
             })
-        }
-        
+        }   
     }
 
     async viewCart(req: Request,res:Response){
@@ -108,12 +107,43 @@ export class CartService {
         }
     }
 
-    removeProductFromCart(req: Request,res:Response){
+    async removeProductFromCart(req: Request,res:Response){
         console.log("remove product from cart reached")
+        try{
+            //here cart is fetched using customer id and if ischeckout is false and then its cart id will be used
+            await this.prisma.cartOfProducts.deleteMany({
+                where:{
+                    productId : '466cb4c4-bac8-4624-94e4-22ddd777bf8f',
+                    cartId: 'ff86659c-b5bd-4088-82f1-e2543b2d0930'
+                }
+                
+            })
+            return res.send({
+                msg:"item removed"
+            })
+        }catch(err){
+            console.log(err)
+            return res.send({
+                msg: "something went wrong"  
+            })
+        }
     }
 
-    updateCart(req: Request,res:Response){
+    async updateCart(req: Request,res:Response){
         console.log("updatecart reached")
+        try{
+            //here cart is fetched using customer id and if ischeckout is false and then its cart id will be used 
+            await this.prisma.cartOfProducts.updateMany({
+                where:{
+                    cartId:"",
+                    productId:"",
+                },
+                data:{
+                    productQuantity: 2     // this will be dynamic value                
+                }
+            })
+        }catch(err){
+            console.log("")
+        }
     }
-
 }

@@ -18,7 +18,7 @@ export class CartController {
         this.cartService.viewCart(req,res)
     }
 
-    @Post("removeProductFromCart/:cartId")
+    @Put("removeProductFromCart")
     removeProductFromCart(@Req() req: Request, @Res() res: Response){
         this.cartService.removeProductFromCart(req,res)
     }
