@@ -8,7 +8,18 @@ export class AuthService {
 
     async signup(body, res: Response) {
         try {
-            const user = await this.prisma.user.create({
+
+            const user = await this.prisma.user.findFirst({
+                where:{
+                    email : body.email
+                }
+            }) 
+
+            if(user) return res.status(400).send({
+                msg : "email already exist"
+            })
+
+             await this.prisma.user.create({
                 data: {
                     username: body.username,
                     email: body.email,
@@ -77,5 +88,22 @@ export class AuthService {
             console.log("------>error is   :", err)
         }
 
+    }
+    async showAllusers(req,res){
+        try{
+            const users = await this.prisma.user.findMany({
+                where:{}
+            }) 
+
+            return res.status(200).send({
+                users: users
+            })
+
+        }catch(err){
+            console.log(err)
+            return res.status(400).send({
+                msg:"somthing went wrong"
+            })
+        }    
     }
 }

@@ -18,7 +18,7 @@ export class CateogriesController {
     }
 
     @Get('showAllCategories')
-    showAllCategories() {
-        this.categoryService.showAllCategories()
+    showAllCategories(@Req() req: Request, @Res() res: Response) {
+        this.categoryService.showAllCategories(req,res)
     }
 }

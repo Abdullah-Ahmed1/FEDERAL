@@ -20,6 +20,7 @@ model User {
   password    String
   phone       String?
   orders      Order[]
+  cart        Cart?
 }
 
 model Product { 
@@ -68,14 +69,16 @@ model OrdersOfProducts {
   @@id([productId, orderId])
 }
 
-
 model Cart {
-  id          String    @id @default(uuid())
-  quantity    String 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  products    CartOfProducts[]
-  order       Order?
+  id           String    @id @default(uuid())
+  quantity     String 
+  isCheckedOut Boolean
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     CartOfProducts[]
+  order        Order?
+  customer     User      @relation(fields: [customerId], references: [id])
+  customerId   String    @unique
 }
 
 

@@ -64,7 +64,26 @@ export class CateogriesService {
         }
     }
 
-    showAllCategories() {
+    async showAllCategories(req:Request,res:Response) {
         console.log("show all categories endpoints reached")
+        try{
+            const categories = await this.prisma.category.findMany({
+                where:{}
+            })
+    
+            return res.send({
+                msg: 'success',
+                categories:  categories   
+            })
+    
+        }catch(err){
+            console.log(err)
+            return res.status(400).send({
+                msg :'something went wrong'
+            })
+
+        }
+
+
     }
 }
