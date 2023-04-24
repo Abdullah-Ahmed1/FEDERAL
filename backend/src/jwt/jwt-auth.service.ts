@@ -9,7 +9,8 @@ export class JwtAuthService {
 
     login(user) {
         try {
-            const payload: JwtPayload = { username: user.username, sub: user.id };
+            console.log("----->>>><>>>",user)
+            const payload: JwtPayload = { firstname: user.firstName, email: user.email };
             return {
 
                 accessToken: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET }),

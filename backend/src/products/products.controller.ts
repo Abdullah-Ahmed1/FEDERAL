@@ -19,7 +19,7 @@ export class ProductsController {
     updateProduct(@Req() req: Request, @Res() res: Response) {
         this.productService.updateProduct(req, res)
     }
-    
+
     @Get('getAllProducts')
     getAllProducts(@Req() req: Request, @Res() res: Response) {
         this.productService.getAllProducts(req, res)
@@ -29,7 +29,6 @@ export class ProductsController {
     getProductById(@Req() req: Request, @Res() res: Response) {
         this.productService.getProductById(req, res)
     }
-
 
     @Delete('deleteProduct/:productId')
     deleteProduct(@Req() req: Request, @Res() res: Response) {

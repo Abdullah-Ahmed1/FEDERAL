@@ -26,7 +26,9 @@ export class AuthController {
 
     @UseGuards(JwtAuthGuard)
     @Get('test')
-    test(){
+    test(@Req() req : Request ,@Res() res){
+      const user = req.user
+      console.log("-------->",user)
       console.log("reacheddddddddddddddddd")   
     }
 

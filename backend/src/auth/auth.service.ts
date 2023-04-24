@@ -8,17 +8,15 @@ export class AuthService {
 
     async signup(body, res: Response) {
         try {
-
+            
             const user = await this.prisma.user.findFirst({
                 where:{
                     email : body.email
                 }
             }) 
-
             if(user) return res.status(400).send({
                 msg : "email already exist"
             })
-
              await this.prisma.user.create({
                 data: {
                     username: body.username,
