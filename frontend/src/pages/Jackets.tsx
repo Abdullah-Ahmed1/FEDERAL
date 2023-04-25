@@ -6,13 +6,13 @@ const Jackets = () => {
         <Box sx={{ marginBottom: "20px" }}>
             <h1 style={{ marginLeft: "120px" }}>Jackets</h1>
             <Grid2 container justifyContent={'center'} alignItems={'center'} >
-                <Grid2 container sx={{ width: { xs: "100%", lg: "85%" } }} justifyContent={'center'} alignItems={'center'} columnSpacing={.1} rowSpacing={0} >
+                <Grid2 container sx={{ width: { xs: "100%", lg: "85%" }}} justifyContent={'center'} alignItems={'center'} columnSpacing={.1} rowSpacing={0} >
                     <Grid2 xs={11} lg= {4}>
                         <Jacket />
                     </Grid2 >
                     <Grid2 xs={11} lg= {4}>
                         <Jacket />
-                    </Grid2 >
+                    </Grid2>
                     <Grid2 xs={11} lg= {4}>
                         <Jacket />
                     </Grid2>    

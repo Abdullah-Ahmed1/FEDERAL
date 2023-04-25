@@ -34,13 +34,11 @@ const Register = () => {
                     <Link to={'#'} style={{ textDecoration: "none" }} >
                         <Typography sx={{ color: "#D8232F" }} >Forget your Password?</Typography>
                     </Link>
-
                 </Grid2>
                 <Grid2 sx={{ padding: "20px 0px 20px 0px" }}>
                     <Link to='/login' style={{ textDecoration: "none" }} >
                         <Typography sx={{ color: "#D8232F" }} >Already have an account</Typography>
                     </Link>
-
                 </Grid2>
             </Grid2>
         </Grid2>

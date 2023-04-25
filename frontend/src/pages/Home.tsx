@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { CollectionList } from '../utils/CollectionList'
 
 
-const Home = () => {
+const  Home = () => {
 
   useEffect(() => {
 
