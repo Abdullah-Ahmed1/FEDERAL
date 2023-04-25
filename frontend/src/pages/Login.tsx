@@ -3,11 +3,23 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GoogleIcon from '@mui/icons-material/Google';
+import {useEffect} from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEmail,setPassword } from '../store/storeSlices/loginFormSlice';
+import type { RootState } from '../store/store';
 const Login = () => {
 
-
+    const dispatch = useDispatch();
+    const form = useSelector((state: RootState) => state.loginForm); // Use RootState to define the type of the state
+        useEffect(()=>{
+            return()=>{   
+                dispatch(setEmail(''))
+                dispatch(setPassword(''))
+            }
+        },[])
+    
     return (
         <Grid2 container justifyContent={'center'} >
             <Grid2 container flexDirection={'column'} alignItems={'center'} lg={5} xs={11} sx={{ backgroundColor: 'white', marginTop: { xs: '100px', lg: "50px" },marginBottom:"50px"}}>
@@ -15,10 +27,10 @@ const Login = () => {
                     <h1 style={{ fontStyle: "italic" }}>LOGIN</h1>
                 </Grid2>
                 <Grid2 lg={10} xs={11} sx={{ marginBottom: "10px" }}>
-                    <TextField id="outlined-basic" fullWidth variant="outlined" placeholder='Email' />
+                    <TextField  value={form.email} onChange={(e)=> dispatch(setEmail(e.target.value))}  id="outlined-basic" fullWidth variant="outlined" placeholder='Email' />
                 </Grid2>
                 <Grid2 lg={10} xs={11} sx={{ marginBottom: "10px" }}>
-                    <TextField id="outlined-basic" fullWidth variant="outlined" placeholder='Password' />
+                    <TextField   value={form.password} onChange={(e)=> dispatch(setPassword(e.target.value))} id="outlined-basic" fullWidth variant="outlined" placeholder='Password' />
                 </Grid2>
                 <Grid2 lg={10} xs={11} >
                     <Button fullWidth sx={{ height: "50px", backgroundColor: "#D8232F", '&:hover': { backgroundColor: "#D8232F" } }} variant="contained" color="success" >

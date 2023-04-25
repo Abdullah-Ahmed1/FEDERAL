@@ -11,7 +11,7 @@ const initialState : LoginFormState = {
 }
 
 export const loginFormSlice = createSlice({
-    name:'loginFormSlice',
+    name:'loginForm',
     initialState,
     reducers:{
         setEmail :(state,action)=>{
@@ -20,6 +20,7 @@ export const loginFormSlice = createSlice({
         setPassword :(state,action)=>{
             state.password = action.payload
         }
+        
     }
 })
 
