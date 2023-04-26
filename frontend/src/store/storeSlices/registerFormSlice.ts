@@ -21,16 +21,25 @@ export const RegisterFormSlice = createSlice({
     name:'registerForm',
     initialState,
     reducers:{
+        setFirstName :(state,action)=>{
+            state.firstname = action.payload
+        },
+        setLastName : (state,action)=>{
+            state.lastname = action.payload
+        },
         setEmail :(state,action)=>{
             state.email = action.payload
         },
         setPassword :(state,action)=>{
             state.password = action.payload
+        },
+        setConfirmPassword :(state,action)=>{
+            state.confirmpassword = action.payload
         }
         
     }
 })
 
 
-export const {setEmail ,setPassword } = RegisterFormSlice.actions
+export const {setFirstName,setLastName,setEmail ,setPassword,setConfirmPassword } = RegisterFormSlice.actions
 export default RegisterFormSlice.reducer
