@@ -135,7 +135,7 @@ export class ProductsService {
                     id: req.params.productId
                 }
             })
-            console.log("------->", deletedProduct)
+            console.log("-------->", deletedProduct)
             if (!deletedProduct) return res.status(404).send({
                 msg: "no product found against given id"
             })

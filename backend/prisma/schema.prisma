@@ -10,6 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Visitor {
+  id  String    @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+   email      String    @unique    
+  username    String
+  address     String
+  password    String
+  phone       String?
+  orders      Order[]
+  cart        Cart?
+}
 model User {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
@@ -53,6 +65,8 @@ model Order {
   updatedAt    DateTime  @updatedAt
   customer     User      @relation(fields: [customerId], references: [id])
   customerId   String
+  visitor     Visitor    @relation(fields: [visitorId], references: [id])
+  visitorId    String
   products     OrdersOfProducts[]
   cart         Cart      @relation(fields: [cartId], references: [id]) 
   cartId       String    @unique
@@ -79,15 +93,17 @@ model Cart {
   order        Order?
   customer     User      @relation(fields: [customerId], references: [id])
   customerId   String    @unique
+  visitor      Visitor    @relation(fields: [visitorId], references: [id])
+  visitorId    String     @unique
 }
 
 
 model CartOfProducts {
-  cart        Cart      @relation(fields: [cartId], references: [id])
-  cartId      String 
-  product     Product   @relation(fields: [productId], references: [id])
-  productId   String 
-  productQuantity Int 
+  cart             Cart      @relation(fields: [cartId], references: [id])
+  cartId           String 
+  product          Product   @relation(fields: [productId], references: [id])
+  productId        String 
+  productQuantity  Int 
 
   @@id([productId, cartId])
 }

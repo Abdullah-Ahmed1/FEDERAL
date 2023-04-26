@@ -21,13 +21,13 @@ import { MailerModule } from '@nestjs-modules/mailer';
       defaults: {
         from: 'meranaam1999@gmail.com'
       },
-      template: {
-        dir: join(__dirname, './templates'),
-        adapter: new HandlebarsAdapter(),
-        options: {
-          strict: true
-        }
-      }
+      // template: {
+      //   dir: join(__dirname, `../templates`),
+      //   adapter: new HandlebarsAdapter(),
+      //   options: {
+      //     strict: false
+      //   }
+      // }
     }),
     inject: [ConfigService]
   }), ConfigModule.forRoot()],
