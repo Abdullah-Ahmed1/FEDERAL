@@ -8,7 +8,6 @@ export class AuthService {
 
     async signup(body, res: Response) {
         try {
-            
             const user = await this.prisma.user.findFirst({
                 where:{
                     email : body.email
@@ -54,7 +53,13 @@ export class AuthService {
                 })
             }
 
+            const {accessToken} = this.jwtAuthService.login(user)
+            res.cookie('jwt', accessToken, {
+                httpOnly: true,
+                // sameSite: 'lax',
+            });
             return res.status(200).send({
+                token:accessToken,
                 msg: "Logged in successfully"
             })
         } catch (err) {
@@ -63,8 +68,6 @@ export class AuthService {
                 msg: "somthing went wrong"
             })
         }
-
-
     }
 
     googleLogin(req, res) {
@@ -75,7 +78,7 @@ export class AuthService {
             const { accessToken } = this.jwtAuthService.login(req.user);
             res.cookie('jwt', accessToken, {
                 httpOnly: true,
-                sameSite: 'lax',
+                // sameSite: 'lax',
             });
             const response = {
                 message: 'User information from google',
@@ -96,7 +99,6 @@ export class AuthService {
             return res.status(200).send({
                 users: users
             })
-
         }catch(err){
             console.log(err)
             return res.status(400).send({

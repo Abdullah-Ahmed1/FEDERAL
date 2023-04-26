@@ -19,6 +19,8 @@ export class AuthController {
         return this.authService.signin(req,res)       
     }
 
+    
+
     @Get('showAllUsers')
     showAllusers (@Req() req : Request ,@Res() res){
         return this.authService.showAllusers(req,res)
