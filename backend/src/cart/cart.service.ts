@@ -15,7 +15,6 @@ export class CartService {
                     isCheckedOut : false,   // check if this cart is checked out
                 }
             })
-    
             if(cart){
                 console.log('cart found')
                 await this.prisma.cart.update({

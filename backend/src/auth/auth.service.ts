@@ -2,9 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Request, Response } from 'express';
 import { JwtAuthService } from '../jwt/jwt-auth.service';
+import { MailService } from 'src/mail/mail.service';
+import { errorResponse } from 'src/constants/responses';
+import { randomBytes } from 'crypto';
 @Injectable()
 export class AuthService {
-    constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService) { }
+    constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService,private mailService :MailService) {}
+    
 
     async signup(body, res: Response) {
         try {
@@ -16,7 +20,7 @@ export class AuthService {
             if(user) return res.status(400).send({
                 msg : "email already exist"
             })
-             await this.prisma.user.create({
+             const createdUser =  await this.prisma.user.create({
                 data: {
                     username: body.username,
                     email: body.email,
@@ -25,12 +29,21 @@ export class AuthService {
                     address: body.address
                 }
             })
-            return res.status(200).send({ msg: "user registered successfully" })
+            
+             const token = await this.prisma.token.create({
+                data:{
+                    token: randomBytes(32).toString('hex')
+                }
+            })
+
+            const url  =`${process.env.BASE_URL}/users/verify/${token.token}`
+            
+            await this.mailService.sendMail(body.username,body.email,url)
+
+            return res.status(200).send({ msg: "email sent to your address please verify"})
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -64,9 +77,7 @@ export class AuthService {
             })
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "somthing went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -87,6 +98,7 @@ export class AuthService {
             res.redirect(`http://localhost:5173?response=${encodeURIComponent(JSON.stringify(response))}`)
         } catch (err) {
             console.log("------>error is   :", err)
+            return res.status(400).send(errorResponse)
         }
 
     }
@@ -101,9 +113,7 @@ export class AuthService {
             })
         }catch(err){
             console.log(err)
-            return res.status(400).send({
-                msg:"somthing went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }    
     }
 }

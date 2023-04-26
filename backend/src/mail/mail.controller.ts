@@ -6,9 +6,9 @@ export class MailController {
 
     constructor(private readonly mailService: MailService) {}
 
-    @Post('test')
-    async sendEmail(@Req() req:Request,@Res() res:Response) {
-        console.log("**--->>",__dirname)
-        return await this.mailService.sendMail(req,res);
-    }
+    // @Post('test')
+    // async sendEmail(@Req() req:Request,@Res() res:Response) {
+    //     console.log("**--->>",__dirname)
+    //     return await this.mailService.sendMail(req,res);
+    // }
 }

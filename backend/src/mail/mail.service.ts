@@ -6,25 +6,25 @@ import { errorResponse } from "src/constants/responses";
 @Injectable()
 export class MailService {
     constructor(private mailerService: MailerService) {}
-    async sendMail(req:Request,res:Response) {
+    async sendMail(name,email,text) {
         try{
-            console.log("----->>>>",req.body.email)
+            console.log("----->>>>",email)
             await this.mailerService.sendMail({
-                to: req.body.email,
+                to: email,
                 subject: 'Greeting from NestJS NodeMailer',
                 // template: './email',
-                text: 'hello world',
+                text: text,
                 context: {
-                    name: req.body.name
+                    name: name
                 }
             })
-            
-            return res.status(200).send({
+
+            return {
                 msg:"email sent successfully"
-            })
+            }
         }catch(err){
             console.log(err)
-            return res.status(400).send(errorResponse)
+            return errorResponse
 
         }
        
