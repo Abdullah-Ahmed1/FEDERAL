@@ -19,7 +19,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
         },
       },
       defaults: {
-        from: '<sendgrid_from_email_address>'
+        from: 'meranaam1999@gmail.com'
       },
       template: {
         dir: join(__dirname, './templates'),
