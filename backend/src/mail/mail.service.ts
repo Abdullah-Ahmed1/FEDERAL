@@ -18,7 +18,7 @@ export class MailService {
                     name: req.body.name
                 }
             })
-
+            
             return res.status(200).send({
                 msg:"email sent successfully"
             })

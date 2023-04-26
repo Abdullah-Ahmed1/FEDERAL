@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtAuthService } from 'src/jwt/jwt-auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Request, Response } from 'express';
+import { errorResponse } from 'src/constants/responses';
 
 @Injectable()
 export class ProductsService {
@@ -41,9 +42,7 @@ export class ProductsService {
             })
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "Something went Wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -69,9 +68,7 @@ export class ProductsService {
             })
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "Something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -86,9 +83,7 @@ export class ProductsService {
             })
 
         } catch (err) {
-            return res.status(400).send({
-                msg: "Something Went Wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -112,9 +107,7 @@ export class ProductsService {
                 product
             })
         } catch (err) {
-            return res.status(400).send({
-                msg: "something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -145,9 +138,7 @@ export class ProductsService {
 
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Request, Response } from 'express';
-
+import { errorResponse } from 'src/constants/responses';
 @Injectable()
 export class CateogriesService {
     constructor(private prisma: PrismaService) { }
@@ -20,9 +20,7 @@ export class CateogriesService {
 
         } catch (err) {
             console.log(err)
-            return res.status(400).send({
-                msg: "something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -58,9 +56,7 @@ export class CateogriesService {
         } catch (err) {
             console.log(err)
 
-            return res.status(400).send({
-                msg: "Something Went Wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -78,9 +74,7 @@ export class CateogriesService {
     
         }catch(err){
             console.log(err)
-            return res.status(400).send({
-                msg :'something went wrong'
-            })
+            return res.status(400).send(errorResponse)
 
         }
 

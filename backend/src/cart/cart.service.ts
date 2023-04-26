@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Request,Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { errorResponse } from 'src/constants/responses';
 @Injectable()
 export class CartService {
     constructor(private prisma: PrismaService) { }
@@ -67,9 +68,7 @@ export class CartService {
 
         }catch(err){
             console.log(err)
-            return res.status(400).send({
-                mag :"something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }   
     }
 
@@ -101,9 +100,7 @@ export class CartService {
 
         }catch(err){
             console.log(err)
-            return res.status(400).send({
-                msg :"something went wrong"
-            })
+            return res.status(400).send(errorResponse)
         }
     }
 
@@ -123,9 +120,7 @@ export class CartService {
             })
         }catch(err){
             console.log(err)
-            return res.send({
-                msg: "something went wrong"  
-            })
+            return res.send(errorResponse)
         }
     }
 
@@ -143,7 +138,8 @@ export class CartService {
                 }
             })
         }catch(err){
-            console.log("")
+            console.log(err)
+            res.status(400).send(errorResponse)
         }
     }
 }
