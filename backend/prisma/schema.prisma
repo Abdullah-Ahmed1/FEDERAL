@@ -28,8 +28,9 @@ model User {
   updatedAt   DateTime  @updatedAt
   email       String    @unique    
   username    String
-  address     String
+  address     String?
   password    String
+  isVerified  Boolean @default(false)
   phone       String?
   orders      Order[]
   cart        Cart?

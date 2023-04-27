@@ -15,7 +15,7 @@ export class UserDto {
     public password:String;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     public address:String;
     
     @IsString()

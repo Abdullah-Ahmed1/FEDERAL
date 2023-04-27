@@ -10,16 +10,14 @@ export class AuthController {
     constructor(private authService: AuthService){}
 
     @Post('signup')
-    signup(@Body() body:UserDto,@Res() res){
+    signup(@Body() body: UserDto,@Res() res){
         return this.authService.signup(body,res);
     }
 
-    @Post('signin') // this here defines the endpoint for an API
+    @Post('signin') 
     signin(@Req() req : Request ,@Res() res){
         return this.authService.signin(req,res)       
     }
-
-    
 
     @Get('showAllUsers')
     showAllusers (@Req() req : Request ,@Res() res){

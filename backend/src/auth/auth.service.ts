@@ -10,7 +10,8 @@ export class AuthService {
     constructor(private prisma: PrismaService, private jwtAuthService: JwtAuthService,private mailService :MailService) {}
     
 
-    async signup(body, res: Response) {
+    async signup(body , res: Response) {
+        console.log("body is : ",body)
         try {
             const user = await this.prisma.user.findFirst({
                 where:{
@@ -20,7 +21,7 @@ export class AuthService {
             if(user) return res.status(400).send({
                 msg : "email already exist"
             })
-             const createdUser =  await this.prisma.user.create({
+               const createdUser = await this.prisma.user.create({
                 data: {
                     username: body.username,
                     email: body.email,
@@ -35,8 +36,7 @@ export class AuthService {
                     token: randomBytes(32).toString('hex')
                 }
             })
-
-            const url  =`${process.env.BASE_URL}/users/verify/${token.token}`
+            const url  =`${process.env.BASE_URL}/users/${createdUser.id}/verify/${token.token}`
             
             await this.mailService.sendMail(body.username,body.email,url)
 
@@ -76,6 +76,60 @@ export class AuthService {
                 msg: "Logged in successfully"
             })
         } catch (err) {
+            console.log(err)
+            return res.status(400).send(errorResponse)
+        }
+    }
+
+    async verify(req,res){
+
+        try{
+            const token =req.body.token
+            const userId =req.body.userId
+
+            const userFound = await this.prisma.user.findFirst({
+                where:{
+                    id :userId
+                }
+            })
+
+            if(!userFound){
+                return res.status(400).send({
+                    message :"Invalid Link"
+                })
+            }
+
+            const tokenFound = await this.prisma.token.findFirst({
+                where:{
+                    token: token
+                }
+            })   
+            if(!tokenFound){
+                return res.status(400).send({
+                    message :"Invalid Link"
+                })
+            } 
+
+            await this.prisma.user.update({
+                where:{
+                    id :userId
+                },
+                data:{
+                    isVerified : true
+                }
+            })
+
+            await this.prisma.token.delete({
+                where:{
+                    id : tokenFound.id
+                }
+            })
+
+            return res.status(200).send({
+                msg :"user verified successfully"
+            })
+
+        }catch(err){    
             console.log(err)
             return res.status(400).send(errorResponse)
         }
