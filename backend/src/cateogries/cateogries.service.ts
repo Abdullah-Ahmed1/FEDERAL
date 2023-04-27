@@ -8,6 +8,18 @@ export class CateogriesService {
     async addCategory(req: Request, res: Response) {
         console.log('add category endpoint reached---')
         try {
+            const categoryFound =  await this.prisma.category.findFirst({
+                where: {
+                    name:req.body.name
+                }
+            }) 
+
+            if(categoryFound){
+                return res.status(409).send({
+                    msg:"category already exist"
+                })
+            }
+
             await this.prisma.category.create({
                 data: {
                     name: req.body.name

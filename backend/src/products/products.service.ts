@@ -24,7 +24,19 @@ export class ProductsService {
             if(!category) return res.status(404).send({
                 msg: "category not found"
             })
+
+            const productFound = await this.prisma.product.findFirst({
+                where:{
+                    name:req.body.name
+                }    
+            })
             
+            if(productFound){
+                return res.status(409).send({
+                    msg :"product with given already exist"
+                })
+            }
+
             await this.prisma.product.create({
                 data: {
                     name: req.body.name,

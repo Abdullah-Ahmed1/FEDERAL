@@ -8,7 +8,7 @@ export class CartService {
      async addProductToCart(req: Request,res:Response){
         console.log("add product to cart endpoint reached")
         try{
-            const productId = '466cb4c4-bac8-4624-94e4-22ddd777bf8f'
+            const productId = '43142e9a-4a7d-44e3-8720-6016dbf485d9'
             const cart =  await this.prisma.cart.findFirst({
                 where:{
                     customerId : req.params.userId,      // this customerid will be the id of the logged in customer
@@ -46,7 +46,7 @@ export class CartService {
                 await this.prisma.cart.create({
                     data:{
                         isCheckedOut :false,
-                        customerId:"63f7af5d-dae3-436c-ae01-e98187d36683",
+                        customerId:req.params.userId,
                         quantity:"sldkcm",
                         products:{
                             create:{
@@ -64,7 +64,6 @@ export class CartService {
                     msg :"product added to cart"
                 })
             }
-
         }catch(err){
             console.log(err)
             return res.status(400).send(errorResponse)
@@ -85,7 +84,6 @@ export class CartService {
                             product:true
                         }
                     }
-                    
                 }
             })
             if(!cart)return res.send({
@@ -106,13 +104,12 @@ export class CartService {
     async removeProductFromCart(req: Request,res:Response){
         console.log("remove product from cart reached")
         try{
-            //here cart is fetched using customer id and if ischeckout is false and then its cart id will be used
+            //here cart is fetched using customer id and check if ischeckout is false and then its cart id will be used
             await this.prisma.cartOfProducts.deleteMany({
                 where:{
                     productId : '466cb4c4-bac8-4624-94e4-22ddd777bf8f',
                     cartId: 'ff86659c-b5bd-4088-82f1-e2543b2d0930'
                 }
-                
             })
             return res.send({
                 msg:"item removed"
