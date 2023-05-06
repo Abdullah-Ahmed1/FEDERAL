@@ -82,11 +82,10 @@ export class AuthService {
     }
 
     async verify(req,res){
-
         try{
-            const token =req.body.token
-            const userId =req.body.userId
-
+            const token =req.params.token
+            const userId =req.params.id
+            console.log("===>",token,userId)
             const userFound = await this.prisma.user.findFirst({
                 where:{
                     id :userId

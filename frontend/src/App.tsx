@@ -31,6 +31,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 // import LoginIcon from '@mui/icons-material/Login';
 import Badge from '@mui/material/Badge';
 import Footer from './components/Footer'
+import EmailVerification from './pages/emailVerification'
 interface Props {
   window?: () => Window;
 }
@@ -186,6 +187,7 @@ export default function Main(props: Props) {
          <Route  path='/jackets'  element={<Jackets/>} />
          <Route  path='/suits'  element={<Suits/>} /> 
          <Route  path='/boots'  element={<Boots/>} />
+         <Route  path='/users/:id/verify/:token'   element = {<EmailVerification/>}/>
        </Routes>
       </Box>
       <Box >

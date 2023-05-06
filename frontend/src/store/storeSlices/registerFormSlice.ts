@@ -1,16 +1,16 @@
 import  {createSlice} from '@reduxjs/toolkit'
 
 export interface RegisterFormState  {
-    firstname: String,
-    lastname: String,
+    // firstname: String,
+    username: String,
     email : String,
     password :String,
     confirmpassword:String
 }
 
 const initialState : RegisterFormState = {
-    firstname: '',
-    lastname: '',
+    // firstname: '',
+    username: '',
     email :'',
     password :'',
     confirmpassword:''
@@ -21,11 +21,11 @@ export const RegisterFormSlice = createSlice({
     name:'registerForm',
     initialState,
     reducers:{
-        setFirstName :(state,action)=>{
-            state.firstname = action.payload
-        },
-        setLastName : (state,action)=>{
-            state.lastname = action.payload
+        // setFirstName :(state,action)=>{
+        //     state.firstname = action.payload
+        // },
+        setUsername : (state,action)=>{
+            state.username = action.payload
         },
         setEmail :(state,action)=>{
             state.email = action.payload
@@ -41,5 +41,5 @@ export const RegisterFormSlice = createSlice({
 })
 
 
-export const {setFirstName,setLastName,setEmail ,setPassword,setConfirmPassword } = RegisterFormSlice.actions
+export const {setUsername,setEmail ,setPassword,setConfirmPassword } = RegisterFormSlice.actions
 export default RegisterFormSlice.reducer
